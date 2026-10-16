@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Gautam Pandey - Resume</title>
+<!-- Source of public/assets/Gautam_Pandey_Resume.pdf. Rebuild with resume/build.ps1 -->
+<style>
+  @page { size: A4; margin: 0.22in 0.36in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 8.1pt; line-height: 1.17; color: #111; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  h1 { text-align: center; font-size: 16pt; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .contact { text-align: center; font-size: 7.8pt; margin-bottom: 4px; }
+  .contact a { color: #1a4fd6; font-weight: bold; text-decoration: underline; }
+  .sep { margin: 0 4px; }
+  h2 { font-size: 9.4pt; text-transform: uppercase; border-bottom: 1px solid #111; padding-bottom: 1px; margin: 4px 0 2px; }
+  p { text-align: justify; }
+  .skills div { margin-bottom: 0.5px; }
+  .skills b { display: inline-block; min-width: 118px; }
+  .job { margin-bottom: 3px; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; }
+  .company { font-weight: bold; font-size: 8.6pt; }
+  .role { color: #1a4fd6; font-style: italic; font-weight: bold; }
+  .when, .where { font-weight: bold; }
+  .where { font-weight: normal; font-weight: 600; }
+  ul { margin: 1px 0 0 11px; }
+  li { text-align: justify; margin-bottom: 0.5px; }
+  .proj { margin-bottom: 3px; }
+  .stack { font-weight: bold; font-size: 7.8pt; }
+  code { font-family: "Courier New", monospace; font-size: 8pt; }
+</style>
+</head>
+<body>
+  <h1>GAUTAM PANDEY</h1>
+  <div class="contact">
+    gautampandey961@gmail.com<span class="sep">|</span>+91-8375854251<span class="sep">|</span>Delhi NCR, India<span class="sep">|</span><a href="https://github.com/gautam1503">GitHub</a><span class="sep">|</span><a href="https://www.linkedin.com/in/gautam-p-a0a317213/">LinkedIn</a>
+  </div>
+
+  <h2>Professional Summary</h2>
+  <p>Backend Software Engineer (SDE-2) with 2 years and 4 months of experience architecting, scaling, and optimizing distributed microservices in fintech and healthcare domains. Specialized in <b>Java, Spring Boot, Hibernate, Python, PostgreSQL, AWS, Docker, Kafka, Redis</b>, and transactional API banking infrastructure. Proven track record in building Digital Rupee (e₹) corporate banking services, designing loosely coupled REST microservices, wallet fee reservation engines with atomic Lua scripting, asynchronous message processing, and secure third-party KYC verification platforms.</p>
+
+  <h2>Technical Skills</h2>
+  <div class="skills">
+    <div><b>Languages &amp; Core:</b> Java, Python, C++, JavaScript, SQL, Data Structures &amp; Algorithms (DSA), OOP Design</div>
+    <div><b>Frameworks &amp; Backend:</b> Spring Boot, Spring Data JPA, Hibernate, Microservices Architecture, Django, Express.js, RESTful APIs, Node.js</div>
+    <div><b>Security &amp; Auth:</b> JWT, HMAC Signature Verification, OTP / PIN Authorization, Payload Encryption, Idempotency</div>
+    <div><b>Cloud, DevOps &amp; Tools:</b> AWS (EC2, S3, SQS, RDS), Docker, Git, Maven, Postman, Swagger, CI/CD, IntelliJ IDEA, VS Code</div>
+    <div><b>Databases &amp; Messaging:</b> MySQL, PostgreSQL, MongoDB, Redis (Lua Scripting, Caching), Apache Kafka, Event-Driven Architecture</div>
+  </div>
+
+  <h2>Work Experience</h2>
+
+  <div class="job">
+    <div class="row"><span class="company">Cotopay</span><span class="when">Oct 2026 – Present</span></div>
+    <div class="row"><span class="role">Software Development Engineer II (SDE-2)</span><span class="where">Delhi NCR, India</span></div>
+    <ul>
+      <li><b>Digital Rupee (e₹) Platform:</b> Developed backend services for the Digital Rupee (e₹) platform, enhancing corporate banking capabilities.</li>
+      <li><b>Wallet Management &amp; UTR Verification:</b> Implemented wallet management and UTR verification workflows, improving payment accuracy and preventing duplicate credits.</li>
+      <li><b>Transaction Authorization &amp; Security:</b> Built secure transaction authorization APIs, including PIN management, OTP-based recovery, and account lockout mechanisms.</li>
+      <li><b>Bulk Transaction Processing:</b> Developed asynchronous bulk transaction processing workflows using AWS S3 and data validation.</li>
+      <li><b>Webhook Integrations:</b> Integrated Calendly webhooks with HMAC signature verification and idempotency checks for reliable lead tracking.</li>
+      <li><b>Cross-Functional Delivery:</b> Collaborated with cross-functional teams to define API contracts, validate end-to-end workflows, and ensure reliable backend operations.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="company">Luckpay Solutions</span><span class="when">Nov 2025 – Oct 2026</span></div>
+    <div class="row"><span class="role">Software Developer (Backend / API Banking)</span><span class="where">Delhi NCR, India</span></div>
+    <ul>
+      <li><b>API Banking Platform &amp; Architecture:</b> Owned full lifecycle backend development for API Banking microservices using Java &amp; Spring Boot across merchant onboarding, verification APIs, and wallet management, handling 10,000+ daily requests and driving over $1.5M in transactional volume.</li>
+      <li><b>Microservices Synchronization &amp; Async Workflows:</b> Decoupled synchronous dependencies by restructuring flows with Kafka event streaming and AWS SQS queues; added strict timeouts, retries, and idempotency to cut cross-service latency by 45% and maintain high system resilience.</li>
+      <li><b>Wallet Processing &amp; Financial Ledger:</b> Engineered high-concurrency merchant wallet engines with pre-transaction balance validation, explicit transaction state tracking (REQUESTED, SUCCESS, FAILED), row-level DB locking, and manual operational adjustment workflows to eliminate balance discrepancies.</li>
+      <li><b>Third-Party KYC Integrations &amp; Security:</b> Integrated multi-provider identity and banking verification APIs (PAN, GSTIN, Penny Drop, IFSC, OTP/SMS, WhatsApp) with end-to-end payload encryption/decryption, token auth, and audit trails, reducing onboarding turnaround by 80%.</li>
+      <li><b>Production Engineering &amp; AWS Deployment:</b> Containerized Spring Boot microservices using Docker and deployed on AWS infrastructure (EC2, SQS, RDS), establishing centralized logging and UAT/production monitoring to accelerate release velocity by 30%.</li>
+      <li><b>Payment Gateway &amp; Payment Links:</b> Built a redirect-flow payin platform from scratch with merchant-service and IP-whitelist validation, plus a merchant-facing Payment Links feature. Integrated 6+ payment platforms (Cashfree, Razorpay, PayU, Easebuzz, PhonePe, JioPay, Decentro) for payments, QR, and transaction management; delivered recurring mandates (ENACH, UPI AutoPay) and cross-border rails via Tazapay and GlomoPay.</li>
+      <li><b>Generic URL Shortener Service:</b> Created a generic URL shortener service used across multiple microservices to send short URLs to merchants; the short link redirects the merchant so they can complete their flow, including the VKYC journey.</li>
+      <li><b>Complex API Integrations &amp; Consent Flows:</b> Integrated complex APIs such as VKYC, Credit Analytics, Experian, and Account Aggregator, and designed the entire consent-based flow end to end.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="company">Doxper (Meddo)</span><span class="when">Jun 2024 – Oct 2025</span></div>
+    <div class="row"><span class="role">Associate Software Developer</span><span class="where">Gurugram, India</span></div>
+    <ul>
+      <li><b>Full-Stack Healthcare Module Ownership:</b> Engineered responsive React.js web modules (Patient Dashboard, Doctor Profile, Appointment Management, Report History) backed by Python/Django REST APIs, serving 500+ daily active medical practitioners.</li>
+      <li><b>Database Optimization &amp; Redis Caching:</b> Investigated and resolved stale Redis cache invalidation bugs and optimized complex PostgreSQL queries, lowering database load times by 35% and improving application stability during peak hours.</li>
+      <li><b>Medical Report Generation Engine:</b> Built automated report uploading, categorizer, and retrieval flows with dynamic A4-format PDF and Excel exports, eliminating manual document processing overhead for clinical teams.</li>
+    </ul>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="proj">
+    <div class="row"><span class="company">Blocked Balance System — Real-Time Fee Reservation Engine</span><span class="stack">Java · Spring Boot · Redis (Lua Scripting) · Kafka/SQS · MySQL</span></div>
+    <ul>
+      <li>Designed and built a <b>Redis-based fee reservation (blocked balance) system</b> to <b>eliminate revenue leakage</b> on chargeable APIs (BAV, OCR, eSign) caused by asynchronous fee-deduction failures.</li>
+      <li>Wrote <b>atomic Redis Lua scripts</b> to block and release fees, guaranteeing <b>thread-safe, idempotent operations</b> under concurrent merchant API calls and <b>preventing race-condition over-spending</b>.</li>
+      <li>Engineered a <b>dual-key Redis schema</b> (blocked-total + blocked-txns) with <b>TTL-based safety nets and a retry scheduler</b>, enabling accurate available balance checks and <b>automatic recovery</b> when downstream services were down.</li>
+      <li>Built <b>cross-service MDR plan caching</b> (dashboard → Redis → API banking) to dynamically resolve per-API merchant fees used in the blocking and wallet-validation flow.</li>
+    </ul>
+  </div>
+  <div class="proj">
+    <div class="row"><span class="company">Manual Fund Credit/Debit — Verification API Wallet Adjustment System</span><span class="stack">Java · Spring Boot · SQS · MySQL · Event-Driven Architecture</span></div>
+    <ul>
+      <li>Designed an <b>event-driven, SQS-based architecture</b> enabling operational teams to manually credit or debit merchant Verification API wallets for corrections, reversals, and approved fee adjustments.</li>
+      <li>Built dashboard-side <code>initiateDebitRequest</code> and <code>initiateCreditRequest</code> APIs with <b>OTP verification, duplicate-request checks, balance validation, and full audit-trail logging</b>.</li>
+      <li>Kept wallet mutations decoupled and safe by routing all balance changes through a <b>single owning service (lp-paytech-api)</b>, preserving <b>row-level locking, ledger entries, and idempotency guarantees</b>.</li>
+      <li>Implemented <b>completion-event driven status tracking</b>, updating <code>apibanking_txn_log</code> from <b>REQUESTED to SUCCESS/FAILED</b> based on downstream wallet-service confirmation.</li>
+    </ul>
+  </div>
+
+  <h2>Education</h2>
+  <div class="row"><span class="company">Bachelor of Engineering — Computer Science &amp; Engineering</span><span class="when">CGPA: 9.3 / 10.0</span></div>
+  <div>Chitkara University, Baddi, HP</div>
+</body>
+</html>

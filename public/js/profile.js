@@ -47,7 +47,7 @@ window.PROFILE = {
     "Freelance web work: fixes, rescues and launches"
   ],
 
-  domains: ["Payments & Banking APIs", "Healthcare SaaS", "E-commerce & CMS sites", "Internal Tools & Dashboards", "Identity & Verification"],
+  domains: ["Digital Rupee (e₹) / CBDC", "Payments & Banking APIs", "Healthcare SaaS", "E-commerce & CMS sites", "Internal Tools & Dashboards", "Identity & Verification"],
 
   stats: [
     { value: 10000, suffix: "+", label: "API requests served daily" },
@@ -58,7 +58,7 @@ window.PROFILE = {
 
   skills: [
     { group: "Languages", icon: "code", items: ["Java", "Python", "Go", "JavaScript", "TypeScript", "C++", "SQL"] },
-    { group: "Backend & Frameworks", icon: "server", items: ["Spring Boot", "Spring Data JPA", "Node.js", "Express.js", "Django / DRF", "REST APIs", "Microservices"] },
+    { group: "Backend & Frameworks", icon: "server", items: ["Spring Boot", "Spring Data JPA", "Hibernate", "JWT / HMAC security", "Node.js", "Express.js", "Django / DRF", "REST APIs", "Microservices"] },
     { group: "Frontend", icon: "layout", items: ["React.js", "HTML5", "CSS3", "Responsive UI", "Dashboards", "PDF / Excel exports"] },
     { group: "Databases", icon: "database", items: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Query optimisation", "Row-level locking"] },
     { group: "Messaging & Async", icon: "zap", items: ["Apache Kafka", "AWS SQS", "Event-driven design", "Idempotency", "Retries & timeouts", "Redis Lua scripts"] },
@@ -70,9 +70,24 @@ window.PROFILE = {
 
   experience: [
     {
+      company: "Cotopay",
+      title: "Software Development Engineer II (SDE-2)",
+      period: "Oct 2026 – Present",
+      location: "Delhi NCR, India",
+      stack: ["Java", "Spring Boot", "Spring Data", "Hibernate", "PostgreSQL", "AWS S3", "JWT", "HMAC", "Microservices", "Maven"],
+      points: [
+        "Developing backend services for the <b>Digital Rupee (e₹)</b> platform, extending corporate banking capabilities.",
+        "Implemented wallet management and <b>UTR verification</b> workflows that improve payment accuracy and prevent duplicate credits.",
+        "Built secure transaction authorization APIs: <b>PIN management</b>, <b>OTP-based recovery</b> and account lockout mechanisms.",
+        "Developed <b>asynchronous bulk transaction processing</b> using <b>AWS S3</b> with data validation.",
+        "Integrated Calendly webhooks with <b>HMAC signature verification</b> and idempotency checks for reliable lead tracking.",
+        "Work with cross-functional teams to define API contracts, validate end-to-end workflows and keep backend operations reliable."
+      ]
+    },
+    {
       company: "Luckpay Solutions",
       title: "Software Developer — Backend / API Platform",
-      period: "Nov 2025 – Present",
+      period: "Nov 2025 – Oct 2026",
       location: "Delhi NCR, India",
       stack: ["Java", "Spring Boot", "Kafka", "AWS SQS", "Redis", "MySQL", "Docker", "AWS"],
       points: [
@@ -111,6 +126,27 @@ window.PROFILE = {
   ],
 
   projects: [
+    {
+      title: "Digital Rupee (e₹) Corporate Banking Services",
+      category: "backend",
+      tagline: "Secure backend for corporate payments on India's CBDC",
+      stack: ["Java", "Spring Boot", "Hibernate", "PostgreSQL", "AWS S3", "JWT"],
+      points: [
+        "Wallet management and UTR verification that prevent duplicate credits.",
+        "Transaction authorization with PIN management, OTP-based recovery and account lockout.",
+        "Asynchronous bulk transaction processing from AWS S3 uploads with data validation."
+      ]
+    },
+    {
+      title: "Secure Webhook Ingestion",
+      category: "integrations",
+      tagline: "Reliable, verified event intake from third-party platforms",
+      stack: ["Java", "Spring Boot", "HMAC", "PostgreSQL"],
+      points: [
+        "Calendly webhooks verified with HMAC signatures so forged events are rejected.",
+        "Idempotency checks make retried deliveries safe, giving reliable lead tracking."
+      ]
+    },
     {
       title: "Real-Time Fee Reservation Engine",
       category: "backend",
