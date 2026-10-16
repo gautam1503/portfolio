@@ -1,7 +1,8 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const TOPICS = [
-  "Full-time role (SDE-2)",
-  "Full-time role (Backend)",
+  "Full-time role (SDE)",
+  "Full-time role (Java / Backend)",
+  "Full-time role (Python / AI)",
   "Full-time role (Full-Stack)",
   "Freelance project",
   "Something else"

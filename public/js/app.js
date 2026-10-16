@@ -31,6 +31,11 @@
     moon: svg('<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>'),
     menu: svg('<path d="M4 6h16M4 12h16M4 18h16"/>'),
     close: svg('<path d="M18 6 6 18M6 6l12 12"/>'),
+    spark: svg('<path d="M12 3l1.9 5.8L20 10.7l-5.6 2.3L12 19l-2.4-6L4 10.7l6.1-1.9L12 3Z"/><path d="M19 3v4M21 5h-4"/>'),
+    star: svg('<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/>'),
+    fork: svg('<circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M6 7v2a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7M12 12v5"/>'),
+    repo: svg('<path d="M4 19.5V4.5A2.5 2.5 0 0 1 6.5 2H20v16H6.5a2.5 2.5 0 0 0-2.5 2.5Zm0 0A2.5 2.5 0 0 0 6.5 22H20v-4"/>'),
+    external: svg('<path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'),
     github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>',
     linkedin: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.5H3.5V9h3.6v11.5ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"/></svg>',
     leetcode: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 0a1.4 1.4 0 0 0-1 .4L7 6.3l-2.6 2.8a5.3 5.3 0 0 0-1.2 2c-.1.6-.2 1.2-.2 1.8 0 .6.1 1.2.3 1.8.2.6.4 1.1.8 1.6l.3.4 4.3 4.4c1.7 1.7 4.6 1.9 6.4.2l2.6-2.6a1.4 1.4 0 1 0-2-2l-2.6 2.6c-.7.7-2 .7-2.6 0l-4.3-4.4a2 2 0 0 1 0-2.7l4.3-4.6 4-4.3a1.4 1.4 0 0 0-1-2.3Zm-2.6 12.2a1.4 1.4 0 0 0 0 2.8h9.8a1.4 1.4 0 0 0 0-2.8h-9.8Z"/></svg>',
@@ -148,7 +153,7 @@
   function terminal() {
     const lines = [
       ['<span class="p">$</span> whoami', 0],
-      ['<span class="s">gautam_pandey</span> <span class="c"># SDE · backend + full-stack</span>', 1],
+      ['<span class="s">gautam_pandey</span> <span class="c"># SDE · backend · full-stack · AI</span>', 1],
       ['<span class="p">$</span> cat stack.json', 0],
       ['{', 1],
       ['  <span class="k">"lang"</span>: [<span class="s">"Java"</span>, <span class="s">"Python"</span>, <span class="s">"Go"</span>, <span class="s">"JS/TS"</span>],', 1],
@@ -161,7 +166,7 @@
       ['✔ <span class="n">10k+</span> req/day · <span class="n">$1.5M+</span> volume', 1],
       ['✔ latency <span class="n">-45%</span> · onboarding <span class="n">-80%</span>', 1],
       ['✔ <span class="n">Rising Star Award</span> 🏆', 1],
-      ['<span class="p">$</span> <span class="s">open_to</span> --role <span class="n">"SDE-2"</span>', 0]
+      ['<span class="p">$</span> <span class="s">open_to</span> --role <span class="n">"SDE"</span> --stack <span class="n">"Java|Python|AI"</span>', 0]
     ];
     const el = $("#terminal");
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.innerHTML = lines.map((l) => l[0]).join("\n"); return; }
@@ -234,6 +239,8 @@
       $$(".filter").forEach((x) => x.classList.toggle("active", x === b));
       const f = b.dataset.filter;
       $$(".project").forEach((p) => p.classList.toggle("hidden", f !== "all" && p.dataset.cat !== f));
+      $("#reposBlock").classList.toggle("hidden", f !== "all" && f !== "personal");
+      revealPassed();
     });
 
     document.addEventListener("click", async (e) => {
@@ -242,6 +249,66 @@
       e.preventDefault();
       try { await navigator.clipboard.writeText(b.dataset.copy); b.innerHTML = icon("check"); setTimeout(() => (b.innerHTML = icon("copy")), 1500); } catch (err) {}
     });
+  }
+
+  // ---------- personal projects (live from GitHub) ----------
+  const LANG_COLORS = { JavaScript: "#f1e05a", TypeScript: "#3178c6", Python: "#3572A5", Java: "#b07219", Go: "#00ADD8", "C++": "#f34b7d", C: "#555555", HTML: "#e34c26", CSS: "#563d7c", PHP: "#4F5D95", Shell: "#89e051", Kotlin: "#A97BFF", Dart: "#00B4AB", Jupyter: "#DA5B0B" };
+  const prettyName = (n) => n.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim().replace(/\b\w/g, (c) => c.toUpperCase());
+  function timeAgo(iso) {
+    const d = (Date.now() - new Date(iso)) / 86400000;
+    if (d < 1) return "today";
+    if (d < 30) return Math.floor(d) + "d ago";
+    if (d < 365) return Math.floor(d / 30) + "mo ago";
+    return Math.floor(d / 365) + "y ago";
+  }
+
+  async function fetchRepos() {
+    const cfg = P.github;
+    const key = "repos:" + cfg.user;
+    try {
+      const c = JSON.parse(sessionStorage.getItem(key) || "null");
+      if (c && Date.now() - c.t < 10 * 60 * 1000) return c.repos;
+    } catch (e) {}
+    let repos;
+    try {
+      // Our backend proxies and caches GitHub so visitors don't hit GitHub's rate limit.
+      const r = await fetch("api/github-repos");
+      if (!r.ok) throw new Error();
+      repos = await r.json();
+    } catch (e) {
+      const r = await fetch(`https://api.github.com/users/${encodeURIComponent(cfg.user)}/repos?per_page=100&sort=pushed`);
+      if (!r.ok) throw new Error("GitHub " + r.status);
+      repos = (await r.json()).map((x) => ({ name: x.name, description: x.description, url: x.html_url, homepage: x.homepage, language: x.language, stars: x.stargazers_count, forks: x.forks_count, fork: x.fork, archived: x.archived, topics: x.topics || [], pushedAt: x.pushed_at }));
+    }
+    try { sessionStorage.setItem(key, JSON.stringify({ t: Date.now(), repos })); } catch (e) {}
+    return repos;
+  }
+
+  async function loadRepos() {
+    const cfg = P.github, grid = $("#reposGrid");
+    $("#githubAll").href = `https://github.com/${cfg.user}?tab=repositories`;
+    grid.innerHTML = '<div class="card repo skeleton"></div>'.repeat(3);
+    try {
+      const hide = new Set((cfg.hide || []).map((n) => n.toLowerCase()));
+      const repos = (await fetchRepos())
+        .filter((r) => (cfg.showForks || !r.fork) && !hide.has(r.name.toLowerCase()))
+        .sort((a, b) => b.stars - a.stars || new Date(b.pushedAt) - new Date(a.pushedAt));
+      $("#repoCount").textContent = repos.length || "";
+      if (!repos.length) { grid.innerHTML = `<div class="repos-msg">New projects are on the way. <a href="${esc(P.links.github)}" target="_blank" rel="noopener">Follow on GitHub</a></div>`; return; }
+      grid.innerHTML = repos.map((r) => {
+        const live = r.homepage && /^https?:\/\//.test(r.homepage) ? `<a href="${esc(r.homepage)}" target="_blank" rel="noopener">${icon("external")} Live</a>` : "";
+        const lang = r.language ? `<span><i class="lang-dot" style="background:${LANG_COLORS[r.language] || "#8b949e"}"></i>${esc(r.language)}</span>` : "";
+        const stars = r.stars ? `<span>${icon("star").replace("<svg", '<svg width="14" height="14"')}${r.stars}</span>` : "";
+        return `<article class="card repo reveal in">
+          <div class="repo-top">${icon("repo")}<h4>${esc(prettyName(r.name))}</h4></div>
+          <p class="${r.description ? "" : "empty"}">${esc(r.description || "Source code and details on GitHub.")}</p>
+          <div class="repo-meta">${lang}${stars}<span>Updated ${timeAgo(r.pushedAt)}</span></div>
+          <div class="repo-links"><a href="${esc(r.url)}" target="_blank" rel="noopener">${icon("github")} Code</a>${live}</div>
+        </article>`;
+      }).join("");
+    } catch (err) {
+      grid.innerHTML = `<div class="repos-msg">Couldn't load projects right now. <a href="https://github.com/${esc(cfg.user)}?tab=repositories" target="_blank" rel="noopener">See them on GitHub</a></div>`;
+    }
   }
 
   // ---------- contact form ----------
@@ -281,4 +348,5 @@
   terminal();
   interactions();
   contactForm();
+  loadRepos();
 })();

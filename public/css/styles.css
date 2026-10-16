@@ -160,7 +160,7 @@ h1, h2, h3 { font-family: "Space Grotesk", "Inter", sans-serif; line-height: 1.1
 .principle p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
 
 /* skills */
-.skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .skill-card .skill-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(129, 140, 248, 0.12); color: var(--accent); margin-bottom: 16px; }
 .skill-card .skill-icon svg { width: 20px; height: 20px; }
 .skill-card h3 { font-size: 17px; margin-bottom: 14px; }
@@ -194,7 +194,35 @@ h1, h2, h3 { font-family: "Space Grotesk", "Inter", sans-serif; line-height: 1.1
 .project .tagline { color: var(--muted); font-size: 15px; margin-bottom: 14px; }
 .project ul { padding-left: 18px; display: grid; gap: 6px; color: var(--muted); font-size: 14.5px; margin-bottom: 18px; flex: 1; }
 .project ul li::marker { color: var(--accent); }
-.project.hidden { display: none; }
+.project.hidden, .repos-block.hidden { display: none; }
+.filter .count { display: inline-block; min-width: 22px; padding: 0 6px; margin-left: 4px; border-radius: 999px; background: rgba(129, 140, 248, 0.18); font-size: 12px; }
+.filter.active .count { background: rgba(255, 255, 255, 0.25); }
+.filter .count:empty { display: none; }
+
+/* GitHub repos */
+.repos-block { margin-top: 44px; }
+.projects-grid:empty + .repos-block { margin-top: 0; }
+.repos-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.repos-head h3 { font-size: 24px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.live { display: inline-flex; align-items: center; gap: 8px; font: 500 12.5px "JetBrains Mono", monospace; color: var(--muted); padding: 4px 10px; border: 1px solid var(--border-strong); border-radius: 999px; }
+.repos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.repo { display: flex; flex-direction: column; gap: 10px; padding: 22px; }
+.repo-top { display: flex; align-items: center; gap: 10px; color: var(--accent); }
+.repo-top svg { width: 18px; height: 18px; flex: none; }
+.repo h4 { font: 600 17px "Space Grotesk", sans-serif; color: var(--text); word-break: break-word; }
+.repo p { color: var(--muted); font-size: 14px; line-height: 1.55; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.repo p.empty { font-style: italic; color: var(--faint); }
+.repo-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; font-size: 13px; color: var(--faint); }
+.repo-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.lang-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.repo-links { display: flex; gap: 8px; margin-top: 4px; }
+.repo-links a { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; padding: 7px 12px; border-radius: 10px; border: 1px solid var(--border-strong); transition: border-color 0.2s, color 0.2s; }
+.repo-links a:hover { border-color: var(--accent); color: var(--accent); }
+.repo-links svg { width: 15px; height: 15px; }
+.repo.skeleton { min-height: 170px; background: linear-gradient(90deg, var(--card) 0%, var(--card-hover) 50%, var(--card) 100%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+.repos-msg { grid-column: 1 / -1; color: var(--muted); padding: 24px; text-align: center; border: 1px dashed var(--border-strong); border-radius: var(--radius); }
+.repos-msg a { color: var(--accent); font-weight: 600; }
 
 /* services */
 .services { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -259,7 +287,7 @@ h1, h2, h3 { font-family: "Space Grotesk", "Inter", sans-serif; line-height: 1.1
 
 /* responsive */
 @media (max-width: 1080px) {
-  .skills-grid, .services { grid-template-columns: repeat(2, 1fr); }
+  .skills-grid, .services, .repos-grid { grid-template-columns: repeat(2, 1fr); }
   .nav-links a { padding: 8px 9px; }
 }
 @media (max-width: 920px) {
@@ -276,7 +304,7 @@ h1, h2, h3 { font-family: "Space Grotesk", "Inter", sans-serif; line-height: 1.1
   .hide-mobile { display: none; }
   .logo-text { display: none; }
   .section { padding-top: 72px; }
-  .skills-grid, .services, .principles, .row2 { grid-template-columns: 1fr; }
+  .skills-grid, .services, .principles, .row2, .repos-grid { grid-template-columns: 1fr; }
   .stat-value { font-size: 30px; }
   .stat { padding: 20px 16px; }
   .contact-wrap { padding: 24px 18px; border-radius: 22px; }

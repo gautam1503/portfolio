@@ -2,7 +2,8 @@
 const fs = require("fs/promises");
 const path = require("path");
 
-const FILE = path.join(__dirname, "..", "data", "messages.json");
+// Vercel's filesystem is read-only except /tmp (which is wiped between cold starts), so use MongoDB there for durable storage.
+const FILE = process.env.VERCEL ? "/tmp/messages.json" : path.join(__dirname, "..", "data", "messages.json");
 let collection = null;
 let writeQueue = Promise.resolve();
 

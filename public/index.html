@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gautam Pandey · Software Engineer</title>
-  <meta name="description" content="Gautam Pandey: software engineer building distributed microservices, APIs and full-stack products in Java, Python, Go and MERN. Open to SDE-2 roles." />
+  <meta name="description" content="Gautam Pandey: software engineer building distributed microservices, APIs and full-stack products in Java, Python, Go, MERN and AI. Open to SDE, backend, full-stack and AI roles." />
   <meta property="og:title" content="Gautam Pandey · Software Engineer" />
-  <meta property="og:description" content="Backend & full-stack engineer: microservices, Kafka, Redis, AWS, React. Open to SDE-2 roles." />
+  <meta property="og:description" content="Backend & full-stack engineer: microservices, Kafka, Redis, AWS, React, AI. Open to SDE roles." />
   <meta name="theme-color" content="#0a0e1a" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%236366f1'/><text x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='700' font-size='30' fill='white'>GP</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,9 +43,9 @@
     <!-- HERO -->
     <section class="hero container">
       <div class="hero-text">
-        <div class="pill reveal"><span class="dot"></span> Open to SDE-2 roles · Immediate conversations</div>
+        <div class="pill reveal"><span class="dot"></span> Open to SDE roles · Java · Python · Full-Stack · AI</div>
         <h1 class="reveal">Hi, I'm <span class="grad" data-bind="name"></span>.<br />I build <span class="typed" id="typed"></span><span class="caret">|</span></h1>
-        <p class="lead reveal">Software engineer with <b data-bind="years"></b> of production experience in <b>Java, Python, Go and the MERN stack</b>. I design and ship microservices, event-driven pipelines and full-stack products used by thousands of people every day.</p>
+        <p class="lead reveal">Software engineer with <b data-bind="years"></b> of production experience in <b>Java, Python, Go, the MERN stack and AI</b>. I design and ship microservices, event-driven pipelines, AI-powered automation and full-stack products used by thousands of people every day.</p>
         <div class="hero-cta reveal">
           <a href="#contact" class="btn btn-primary">Let's talk <span class="i" data-icon="arrow"></span></a>
           <a href="#" class="btn btn-ghost" data-bind-href="resume" download>Download résumé <span class="i" data-icon="download"></span></a>
@@ -114,8 +114,16 @@
         <button class="filter" data-filter="fullstack">Full-Stack</button>
         <button class="filter" data-filter="integrations">Integrations</button>
         <button class="filter" data-filter="freelance">Freelance</button>
+        <button class="filter" data-filter="personal">Personal Projects <span class="count" id="repoCount"></span></button>
       </div>
       <div class="projects-grid" id="projectsGrid"></div>
+      <div class="repos-block" id="reposBlock">
+        <div class="repos-head">
+          <h3>Personal projects <span class="live"><span class="dot"></span> live from GitHub</span></h3>
+          <a class="btn btn-ghost btn-sm" id="githubAll" target="_blank" rel="noopener">View all on GitHub <span class="i" data-icon="arrow"></span></a>
+        </div>
+        <div class="repos-grid" id="reposGrid"></div>
+      </div>
     </section>
 
     <!-- FREELANCE -->
@@ -144,7 +152,7 @@
         <div class="contact-info reveal">
           <span class="eyebrow">07 · Contact</span>
           <h2>Let's build something <span class="grad">great</span> together.</h2>
-          <p class="muted">Hiring for an SDE-2 / backend / full-stack role, or need a freelance fix? Call, email or send a message and I'll reply within 24 hours.</p>
+          <p class="muted">Hiring for an SDE, Java, Python, full-stack or AI role, or need a freelance fix? Call, email or send a message and I'll reply within 24 hours.</p>
           <div class="contact-cards" id="contactCards"></div>
         </div>
         <form class="contact-form reveal" id="contactForm" novalidate>
@@ -156,8 +164,9 @@
             <label><span>Company <span class="opt">(optional)</span></span><input name="company" maxlength="120" autocomplete="organization" placeholder="Acme Inc." /></label>
             <label>I'm reaching out about
               <select name="topic">
-                <option>Full-time role (SDE-2)</option>
-                <option>Full-time role (Backend)</option>
+                <option>Full-time role (SDE)</option>
+                <option>Full-time role (Java / Backend)</option>
+                <option>Full-time role (Python / AI)</option>
                 <option>Full-time role (Full-Stack)</option>
                 <option>Freelance project</option>
                 <option>Something else</option>

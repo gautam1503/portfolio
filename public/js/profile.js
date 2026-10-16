@@ -15,11 +15,19 @@ window.PROFILE = {
     leetcode: "https://leetcode.com/"
   },
 
+  // Personal projects are loaded live from GitHub: new repos appear and deleted ones disappear automatically.
+  github: {
+    user: "gautam1503",
+    hide: ["portfolio"], // repo names to never show
+    showForks: false
+  },
+
   rotatingRoles: [
     "distributed microservices",
     "high-throughput REST APIs",
     "event-driven systems",
     "full-stack web products",
+    "AI-powered automation",
     "secure third-party integrations"
   ],
 
@@ -29,6 +37,7 @@ window.PROFILE = {
   highlights: [
     "End-to-end ownership of production microservices",
     "Polyglot: Java, Python, Go, JavaScript / TypeScript",
+    "AI & LLM integrations and automation pipelines",
     "SQL + NoSQL, caching and message queues",
     "Freelance web work: fixes, rescues and launches"
   ],
@@ -48,6 +57,7 @@ window.PROFILE = {
     { group: "Frontend", icon: "layout", items: ["React.js", "HTML5", "CSS3", "Responsive UI", "Dashboards", "PDF / Excel exports"] },
     { group: "Databases", icon: "database", items: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Query optimisation", "Row-level locking"] },
     { group: "Messaging & Async", icon: "zap", items: ["Apache Kafka", "AWS SQS", "Event-driven design", "Idempotency", "Retries & timeouts", "Redis Lua scripts"] },
+    { group: "AI & Automation", icon: "spark", items: ["LLM API integration", "Prompt engineering", "AI content pipelines", "Python automation", "AI-assisted development"] },
     { group: "Cloud & DevOps", icon: "cloud", items: ["AWS (EC2, S3, SQS, RDS)", "Docker", "CI/CD", "Git", "Maven", "Logging & monitoring"] },
     { group: "Web Platforms", icon: "globe", items: ["WordPress", "Elementor", "Wix", "Other site builders", "Plugin & theme fixes"] },
     { group: "Practices & Tools", icon: "tool", items: ["DSA", "OOP & design patterns", "System design", "Postman", "Swagger / OpenAPI", "IntelliJ / VS Code"] }
