@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gautam Pandey · Software Engineer</title>
+  <meta name="description" content="Gautam Pandey: software engineer building distributed microservices, APIs and full-stack products in Java, Python, Go and MERN. Open to SDE-2 roles." />
+  <meta property="og:title" content="Gautam Pandey · Software Engineer" />
+  <meta property="og:description" content="Backend & full-stack engineer: microservices, Kafka, Redis, AWS, React. Open to SDE-2 roles." />
+  <meta name="theme-color" content="#0a0e1a" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%236366f1'/><text x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='700' font-size='30' fill='white'>GP</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow g1" aria-hidden="true"></div>
+  <div class="bg-glow g2" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="logo"><span class="logo-mark">GP</span><span class="logo-text">Gautam Pandey</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#freelance">Freelance</a>
+        <a href="#awards">Awards</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle colour theme"></button>
+        <a href="#contact" class="btn btn-primary btn-sm hide-mobile">Hire me</a>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero container">
+      <div class="hero-text">
+        <div class="pill reveal"><span class="dot"></span> Open to SDE-2 roles · Immediate conversations</div>
+        <h1 class="reveal">Hi, I'm <span class="grad" data-bind="name"></span>.<br />I build <span class="typed" id="typed"></span><span class="caret">|</span></h1>
+        <p class="lead reveal">Software engineer with <b data-bind="years"></b> of production experience in <b>Java, Python, Go and the MERN stack</b>. I design and ship microservices, event-driven pipelines and full-stack products used by thousands of people every day.</p>
+        <div class="hero-cta reveal">
+          <a href="#contact" class="btn btn-primary">Let's talk <span class="i" data-icon="arrow"></span></a>
+          <a href="#" class="btn btn-ghost" data-bind-href="resume" download>Download résumé <span class="i" data-icon="download"></span></a>
+        </div>
+        <div class="hero-social reveal" id="heroSocial"></div>
+      </div>
+      <div class="hero-card reveal">
+        <div class="term">
+          <div class="term-bar"><span></span><span></span><span></span><em>gautam@prod:~</em></div>
+          <pre class="term-body" id="terminal"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="container stats" id="stats"></section>
+
+    <!-- ABOUT -->
+    <section class="section container" id="about">
+      <div class="section-head reveal">
+        <span class="eyebrow">01 · About</span>
+        <h2>Engineer first. Domain-agnostic by design.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p id="summary"></p>
+          <ul class="checks" id="highlights"></ul>
+        </div>
+        <div class="about-side reveal">
+          <h3>Domains I've shipped in</h3>
+          <div class="chips" id="domains"></div>
+          <h3>How I work</h3>
+          <div class="principles" id="principles"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section container" id="skills">
+      <div class="section-head reveal">
+        <span class="eyebrow">02 · Skills</span>
+        <h2>Polyglot across the stack</h2>
+        <p class="muted">I pick the tool that fits the problem, not the other way round.</p>
+      </div>
+      <div class="skills-grid" id="skillsGrid"></div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section container" id="experience">
+      <div class="section-head reveal">
+        <span class="eyebrow">03 · Experience</span>
+        <h2>Where I've made an impact</h2>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section container" id="projects">
+      <div class="section-head reveal">
+        <span class="eyebrow">04 · Projects</span>
+        <h2>Systems I've designed and built</h2>
+      </div>
+      <div class="filters reveal" id="filters" role="tablist">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="backend">Backend &amp; Distributed</button>
+        <button class="filter" data-filter="fullstack">Full-Stack</button>
+        <button class="filter" data-filter="integrations">Integrations</button>
+        <button class="filter" data-filter="freelance">Freelance</button>
+      </div>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+
+    <!-- FREELANCE -->
+    <section class="section container" id="freelance">
+      <div class="section-head reveal">
+        <span class="eyebrow">05 · Freelance</span>
+        <h2>Need something fixed or built?</h2>
+        <p class="muted">Alongside full-time work, I've delivered freelance projects for clients: UI fixes, backend fixes and rescues of WordPress, Elementor and Wix sites.</p>
+      </div>
+      <div class="services" id="services"></div>
+    </section>
+
+    <!-- AWARDS + EDUCATION -->
+    <section class="section container" id="awards">
+      <div class="section-head reveal">
+        <span class="eyebrow">06 · Recognition</span>
+        <h2>Awards &amp; education</h2>
+      </div>
+      <div class="awards" id="awardsGrid"></div>
+      <div class="edu reveal" id="edu"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section container" id="contact">
+      <div class="contact-wrap">
+        <div class="contact-info reveal">
+          <span class="eyebrow">07 · Contact</span>
+          <h2>Let's build something <span class="grad">great</span> together.</h2>
+          <p class="muted">Hiring for an SDE-2 / backend / full-stack role, or need a freelance fix? Call, email or send a message and I'll reply within 24 hours.</p>
+          <div class="contact-cards" id="contactCards"></div>
+        </div>
+        <form class="contact-form reveal" id="contactForm" novalidate>
+          <div class="row2">
+            <label>Your name<input name="name" required maxlength="100" autocomplete="name" placeholder="Jane Recruiter" /></label>
+            <label>Email<input name="email" type="email" required maxlength="150" autocomplete="email" placeholder="jane@company.com" /></label>
+          </div>
+          <div class="row2">
+            <label><span>Company <span class="opt">(optional)</span></span><input name="company" maxlength="120" autocomplete="organization" placeholder="Acme Inc." /></label>
+            <label>I'm reaching out about
+              <select name="topic">
+                <option>Full-time role (SDE-2)</option>
+                <option>Full-time role (Backend)</option>
+                <option>Full-time role (Full-Stack)</option>
+                <option>Freelance project</option>
+                <option>Something else</option>
+              </select>
+            </label>
+          </div>
+          <label>Message<textarea name="message" required minlength="10" maxlength="3000" rows="5" placeholder="Tell me about the role or project…"></textarea></label>
+          <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary btn-block" id="sendBtn">Send message <span class="i" data-icon="send"></span></button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Gautam Pandey · Built with Node.js, Express &amp; vanilla JS</p>
+      <div class="footer-social" id="footerSocial"></div>
+    </div>
+  </footer>
+
+  <a class="fab-whatsapp" id="whatsappFab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"></a>
+
+  <script src="js/profile.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
