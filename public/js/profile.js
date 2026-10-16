@@ -18,7 +18,12 @@ window.PROFILE = {
   // Personal projects are loaded live from GitHub: new repos appear and deleted ones disappear automatically.
   github: {
     user: "gautam1503",
-    hide: ["portfolio"], // repo names to never show
+    // Repo names to never show (company take-home assessments are hidden for now)
+    hide: [
+      "portfolio",
+      "luckpay-assessment", "BAJAJ_TEST", "Zippee-Assignment", "Zettabola-Assessment",
+      "reno-assignment", "WB-Assignment", "eta-assignment", "Scaler_Assignment"
+    ],
     showForks: false
   },
 
