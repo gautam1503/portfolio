@@ -11,8 +11,7 @@ window.PROFILE = {
   links: {
     github: "https://github.com/gautam1503",
     linkedin: "https://www.linkedin.com/in/gautam-p-a0a317213/",
-    // TODO: replace with your LeetCode profile URL
-    leetcode: "https://leetcode.com/"
+    leetcode: "https://leetcode.com/u/15Gautam/"
   },
 
   // Personal projects are loaded live from GitHub: new repos appear and deleted ones disappear automatically.
