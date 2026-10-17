@@ -24,7 +24,8 @@ window.PROFILE = {
       "luckpay-assessment", "BAJAJ_TEST", "Zippee-Assignment", "Zettabola-Assessment",
       "reno-assignment", "WB-Assignment", "eta-assignment", "Scaler_Assignment"
     ],
-    showForks: false
+    showForks: false,
+    initialCount: 5 // latest repos shown before "View all"
   },
 
   rotatingRoles: [

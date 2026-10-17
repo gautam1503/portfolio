@@ -308,20 +308,35 @@
       const hide = new Set((cfg.hide || []).map((n) => n.toLowerCase()));
       const repos = (await fetchRepos())
         .filter((r) => (cfg.showForks || !r.fork) && !hide.has(r.name.toLowerCase()))
-        .sort((a, b) => b.stars - a.stars || new Date(b.pushedAt) - new Date(a.pushedAt));
+        .sort((a, b) => new Date(b.pushedAt) - new Date(a.pushedAt)); // most recently updated first
       $("#repoCount").textContent = repos.length || "";
       if (!repos.length) { grid.innerHTML = `<div class="repos-msg">New projects are on the way. <a href="${esc(P.links.github)}" target="_blank" rel="noopener">Follow on GitHub</a></div>`; return; }
-      grid.innerHTML = repos.map((r) => {
+      const limit = cfg.initialCount || 5;
+      grid.innerHTML = repos.map((r, i) => {
         const live = r.homepage && /^https?:\/\//.test(r.homepage) ? `<a href="${esc(r.homepage)}" target="_blank" rel="noopener">${icon("external")} Live</a>` : "";
         const lang = r.language ? `<span><i class="lang-dot" style="background:${LANG_COLORS[r.language] || "#8b949e"}"></i>${esc(r.language)}</span>` : "";
         const stars = r.stars ? `<span>${icon("star").replace("<svg", '<svg width="14" height="14"')}${r.stars}</span>` : "";
-        return `<article class="card repo reveal in">
+        return `<article class="card repo reveal in${i >= limit ? " extra" : ""}">
           <div class="repo-top">${icon("repo")}<h4>${esc(prettyName(r.name))}</h4></div>
           <p class="${r.description ? "" : "empty"}">${esc(r.description || "Source code and details on GitHub.")}</p>
           <div class="repo-meta">${lang}${stars}<span>Updated ${timeAgo(r.pushedAt)}</span></div>
           <div class="repo-links"><a href="${esc(r.url)}" target="_blank" rel="noopener">${icon("github")} Code</a>${live}</div>
         </article>`;
       }).join("");
+
+      const more = $("#reposMore");
+      more.hidden = repos.length <= limit;
+      const setExpanded = (open) => {
+        grid.classList.toggle("expanded", open);
+        more.setAttribute("aria-expanded", open);
+        more.innerHTML = open ? `Show less ${icon("arrow")}` : `View all ${repos.length} projects ${icon("arrow")}`;
+      };
+      setExpanded(false);
+      more.onclick = () => {
+        const open = !grid.classList.contains("expanded");
+        setExpanded(open);
+        if (!open) $("#reposBlock").scrollIntoView({ block: "start" });
+      };
     } catch (err) {
       grid.innerHTML = `<div class="repos-msg">Couldn't load projects right now. <a href="https://github.com/${esc(cfg.user)}?tab=repositories" target="_blank" rel="noopener">See them on GitHub</a></div>`;
     }

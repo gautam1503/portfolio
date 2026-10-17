@@ -219,6 +219,13 @@ h1, h2, h3 { font-family: "Space Grotesk", "Inter", sans-serif; line-height: 1.1
 .repo-links a { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; padding: 7px 12px; border-radius: 10px; border: 1px solid var(--border-strong); transition: border-color 0.2s, color 0.2s; }
 .repo-links a:hover { border-color: var(--accent); color: var(--accent); }
 .repo-links svg { width: 15px; height: 15px; }
+.repos-grid:not(.expanded) .repo.extra { display: none; }
+.repos-grid.expanded .repo.extra { animation: fadeUp 0.4s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } }
+.repos-more-wrap { display: flex; justify-content: center; margin-top: 24px; }
+#reposMore svg { width: 16px; height: 16px; transform: rotate(90deg); transition: transform 0.2s; }
+#reposMore[aria-expanded="true"] svg { transform: rotate(-90deg); }
+#reposMore[hidden] { display: none; }
 .repo.skeleton { min-height: 170px; background: linear-gradient(90deg, var(--card) 0%, var(--card-hover) 50%, var(--card) 100%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
 @keyframes shimmer { to { background-position: -200% 0; } }
 .repos-msg { grid-column: 1 / -1; color: var(--muted); padding: 24px; text-align: center; border: 1px dashed var(--border-strong); border-radius: var(--radius); }
