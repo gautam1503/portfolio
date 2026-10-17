@@ -142,7 +142,8 @@
           <span class="c-arrow">${icon("external")}</span>
         </a>`).join("")}
       </div>
-      <div class="c-location">${icon("pin")}<span>${esc(P.location)}</span><span class="c-badge">Open to remote &amp; relocation</span></div>`;
+      <div class="c-location">${icon("pin")}<span>${esc(P.location)}</span><span class="c-badge">Open to remote &amp; relocation</span></div>
+      <div class="c-time" id="localTime"></div>`;
 
     const fab = $("#whatsappFab");
     fab.href = "https://wa.me/" + P.phoneRaw.replace("+", "") + "?text=" + encodeURIComponent("Hi Gautam, I saw your portfolio and would like to connect.");
@@ -165,34 +166,100 @@
     })();
   }
 
-  // ---------- terminal ----------
+  // ---------- interactive terminal ----------
+  const FXo = () => window.FX || { sfx() {}, unlock() {}, toast() {}, confetti() {}, hireMode() {}, palette() {} };
+  const kv = (k, v) => `<span class="k">${k.padEnd(10)}</span><span class="c">:</span> ${v}`;
+  const COMMANDS = {
+    help: { desc: "list available commands", run: () => [
+      "Available commands:",
+      ...Object.entries(COMMANDS).filter(([, c]) => !c.hidden).map(([n, c]) => `  <span class="s">${n.padEnd(12)}</span><span class="c">${c.desc}</span>`),
+      "", '<span class="c">Tip: ↑/↓ for history, Tab to autocomplete. Some commands are secret.</span>'] },
+    whoami: { desc: "who is Gautam?", run: () => [`<span class="s">${P.name}</span> · ${P.role}`, `<span class="c">${P.location} · ${experienceText()} in production</span>`] },
+    about: { desc: "short bio", run: () => [P.summary] },
+    skills: { desc: "tech stack, grouped", run: () => P.skills.map((g) => kv(g.group.split(" ")[0].toLowerCase(), g.items.slice(0, 6).join(", "))) },
+    experience: { desc: "work history", run: () => P.experience.flatMap((e) => [`<span class="n">${e.period.padEnd(20)}</span><span class="s">${e.company}</span>`, `<span class="c">${" ".repeat(20)}${e.title}</span>`]) },
+    projects: { desc: "things I've built", run: () => [...P.projects.slice(0, 6).map((p) => `<span class="s">▸</span> ${p.title} <span class="c">· ${p.stack.slice(0, 3).join(", ")}</span>`), '<span class="c">…more in the Projects section. Type `goto projects`.</span>'] },
+    impact: { desc: "numbers that matter", run: () => P.stats.map((s) => `<span class="ok">✔</span> <span class="n">${s.prefix || ""}${s.value.toLocaleString("en-US")}${s.suffix || ""}</span> ${s.label.toLowerCase()}`) },
+    contact: { desc: "how to reach me", run: () => [kv("email", `<a href="mailto:${P.email}">${P.email}</a>`), kv("phone", `<a href="tel:${P.phoneRaw}">${P.phone}</a>`), kv("linkedin", `<a href="${P.links.linkedin}" target="_blank" rel="noopener">open ↗</a>`), kv("github", `<a href="${P.links.github}" target="_blank" rel="noopener">@${P.github.user} ↗</a>`)] },
+    resume: { desc: "download my résumé", run: () => { const a = document.createElement("a"); a.href = P.resume; a.download = ""; a.click(); FXo().unlock("resume"); return ["Downloading Gautam_Pandey_Resume.pdf… <span class=\"ok\">done</span>"]; } },
+    goto: { desc: "scroll to a section, e.g. goto projects", run: (arg) => { const el = arg && document.getElementById(arg.replace(/^#/, "")); if (!el) return [`<span class="err">usage:</span> goto about|skills|experience|projects|freelance|awards|under-the-hood|contact`]; el.scrollIntoView({ behavior: "smooth" }); return [`Navigating to #${arg}…`]; } },
+    theme: { desc: "toggle light / dark", run: () => { $("#themeToggle").click(); return [`Theme set to <span class="s">${document.documentElement.dataset.theme}</span>.`]; } },
+    sound: { desc: "toggle sound effects", run: () => { $("#soundToggle").click(); return [`Sound ${window.FX && FX.isMuted() ? "off" : "on"}.`]; } },
+    secrets: { desc: "achievements progress", run: () => { const { list, unlocked } = window.FX ? FX.achievements() : { list: {}, unlocked: new Set() }; return [`Found ${unlocked.size}/${Object.keys(list).length} secrets:`, ...Object.entries(list).map(([k, a]) => unlocked.has(k) ? `  <span class="ok">✔</span> ${a.icon} ${a.name}` : `  <span class="c">🔒 ??? · hint: ${a.hint}</span>`)]; } },
+    clear: { desc: "clear the screen", run: () => { $("#terminal").innerHTML = ""; return []; } },
+    sudo: { hidden: true, run: (arg) => { if (/hire/.test(arg || "")) { FXo().unlock("sudo"); FXo().hireMode(); return ['<span class="ok">[sudo] access granted.</span>', "Deploying Gautam to your team… <span class=\"ok\">100%</span>", "Next step: scroll down and send a message 🚀"]; } FXo().unlock("sudo"); return ['<span class="err">gautam is not in the sudoers file.</span> This incident will be reported… just kidding.', '<span class="c">Try: sudo hire gautam</span>']; } },
+    hire: { hidden: true, run: () => COMMANDS.sudo.run("hire") },
+    ls: { hidden: true, run: () => ['<span class="s">about.txt  skills.yml  experience.log  projects/  resume.pdf  secrets/</span>'] },
+    cat: { hidden: true, run: (arg) => arg === "about.txt" ? COMMANDS.about.run() : arg === "skills.yml" ? COMMANDS.skills.run() : arg === "experience.log" ? COMMANDS.experience.run() : arg?.startsWith("secrets") ? ['<span class="err">permission denied:</span> secrets are earned, not read 😉'] : [`cat: ${arg || ""}: No such file`] },
+    rm: { hidden: true, run: () => ['<span class="err">Nice try.</span> Production is protected. I review my deploys. 😄'] },
+    date: { hidden: true, run: () => [new Date().toString()] },
+    echo: { hidden: true, run: (arg) => [esc(arg || "")] },
+    exit: { hidden: true, run: () => ["There's no escape. You're already hired. 😄"] }
+  };
+
   function terminal() {
-    const lines = [
-      ['<span class="p">$</span> whoami', 0],
-      ['<span class="s">gautam_pandey</span> <span class="c"># SDE · backend · full-stack · AI</span>', 1],
-      ['<span class="p">$</span> cat stack.json', 0],
-      ['{', 1],
-      ['  <span class="k">"lang"</span>: [<span class="s">"Java"</span>, <span class="s">"Python"</span>, <span class="s">"Go"</span>, <span class="s">"JS/TS"</span>],', 1],
-      ['  <span class="k">"backend"</span>: [<span class="s">"Spring Boot"</span>, <span class="s">"Django"</span>, <span class="s">"Node"</span>],', 1],
-      ['  <span class="k">"data"</span>: [<span class="s">"Postgres"</span>, <span class="s">"MySQL"</span>, <span class="s">"Mongo"</span>, <span class="s">"Redis"</span>],', 1],
-      ['  <span class="k">"async"</span>: [<span class="s">"Kafka"</span>, <span class="s">"SQS"</span>],', 1],
-      ['  <span class="k">"infra"</span>: [<span class="s">"AWS"</span>, <span class="s">"Docker"</span>, <span class="s">"CI/CD"</span>]', 1],
-      ['}', 1],
-      ['<span class="p">$</span> ./impact --summary', 0],
-      ['✔ <span class="n">10k+</span> req/day · <span class="n">$1.5M+</span> volume', 1],
-      ['✔ latency <span class="n">-45%</span> · onboarding <span class="n">-80%</span>', 1],
-      ['✔ <span class="n">Rising Star Award</span> 🏆', 1],
-      ['<span class="p">$</span> <span class="s">open_to</span> --role <span class="n">"SDE"</span> --stack <span class="n">"Java|Python|AI"</span>', 0]
+    const out = $("#terminal"), input = $("#termInput"), box = $("#term");
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const history = [];
+    let hIdx = 0, busy = true;
+    const print = (html, cls = "") => { const d = document.createElement("div"); d.className = "tl " + cls; d.innerHTML = html || "&nbsp;"; out.appendChild(d); out.scrollTop = out.scrollHeight; };
+    const promptLine = (cmd) => print(`<span class="p">❯</span> ${esc(cmd)}`, "cmd");
+
+    function exec(raw) {
+      const line = raw.trim();
+      if (!line) return;
+      history.push(line); hIdx = history.length;
+      promptLine(line);
+      const [name, ...rest] = line.split(/\s+/);
+      const cmd = COMMANDS[name.toLowerCase()];
+      if (!cmd) { FXo().sfx("error"); print(`<span class="err">command not found:</span> ${esc(name)}. Type <span class="s">help</span>.`); return; }
+      FXo().sfx("enter");
+      FXo().unlock("terminal");
+      (cmd.run(rest.join(" ")) || []).forEach((l) => print(l));
+    }
+
+    // Intro script: readable YAML-style output, typed line by line.
+    const intro = [
+      ["cmd", "whoami"],
+      ["", `<span class="s">gautam_pandey</span> <span class="c">— SDE · backend · full-stack · AI</span>`],
+      ["cmd", "cat stack.yml"],
+      ["", kv("languages", "Java, Python, Go, JS/TS")],
+      ["", kv("backend", "Spring Boot, Django, Node")],
+      ["", kv("data", "Postgres, MySQL, Mongo, Redis")],
+      ["", kv("async", "Kafka, SQS")],
+      ["", kv("cloud", "AWS, Docker, CI/CD")],
+      ["cmd", "./impact --summary"],
+      ["", '<span class="ok">✔</span> <span class="n">10k+</span> req/day    <span class="ok">✔</span> <span class="n">$1.5M+</span> volume'],
+      ["", '<span class="ok">✔</span> <span class="n">-45%</span> latency    <span class="ok">✔</span> <span class="n">-80%</span> onboarding'],
+      ["", '<span class="ok">✔</span> <span class="n">Rising Star Award</span> 🏆'],
+      ["", '<span class="c">Type</span> <span class="s">help</span> <span class="c">below to explore ↓</span>']
     ];
-    const el = $("#terminal");
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.innerHTML = lines.map((l) => l[0]).join("\n"); return; }
-    let n = 0;
-    (function next() {
-      if (n >= lines.length) return;
-      el.innerHTML += (n ? "\n" : "") + lines[n][0];
-      n++;
-      setTimeout(next, lines[n - 1][1] ? 110 : 420);
-    })();
+    const ready = () => { busy = false; box.classList.add("ready"); };
+    if (reduced) { intro.forEach(([t, h]) => (t === "cmd" ? promptLine(h) : print(h))); ready(); }
+    else {
+      let i = 0;
+      const startDelay = document.documentElement.classList.contains("booting") ? 2200 : 500;
+      setTimeout(function next() {
+        if (!busy) return; // user skipped the intro by typing a command
+        if (i >= intro.length) return ready();
+        const [t, h] = intro[i++];
+        t === "cmd" ? promptLine(h) : print(h);
+        setTimeout(next, t === "cmd" ? 380 : 90);
+      }, startDelay);
+    }
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { if (busy) { out.innerHTML = ""; intro.forEach(([t, h]) => (t === "cmd" ? promptLine(h) : print(h))); ready(); } exec(input.value); input.value = ""; }
+      else if (e.key === "ArrowUp") { if (hIdx > 0) input.value = history[--hIdx]; e.preventDefault(); }
+      else if (e.key === "ArrowDown") { hIdx = Math.min(history.length, hIdx + 1); input.value = history[hIdx] || ""; e.preventDefault(); }
+      else if (e.key === "Tab") {
+        e.preventDefault();
+        const m = Object.keys(COMMANDS).filter((c) => !COMMANDS[c].hidden && c.startsWith(input.value.toLowerCase()));
+        if (m.length === 1) input.value = m[0] + " "; else if (m.length) print(`<span class="c">${m.join("  ")}</span>`);
+      }
+      else if (e.key.length === 1) FXo().sfx("key");
+    });
+    box.addEventListener("click", (e) => { if (!e.target.closest("a")) input.focus({ preventScroll: true }); });
   }
 
   // ---------- counters ----------
@@ -245,8 +312,17 @@
     applyTheme(saved || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"));
     themeBtn.addEventListener("click", () => {
       const t = document.documentElement.dataset.theme === "light" ? "dark" : "light";
-      applyTheme(t);
+      FXo().sfx(t === "light" ? "day" : "night");
+      FXo().unlock("theme");
       try { localStorage.setItem("theme", t); } catch (e) {}
+      themeBtn.classList.remove("spin"); void themeBtn.offsetWidth; themeBtn.classList.add("spin");
+      // Circular reveal from the toggle button (View Transitions API), plain swap elsewhere.
+      if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) return applyTheme(t);
+      const r = themeBtn.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+      const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      document.startViewTransition(() => applyTheme(t)).ready.then(() => {
+        document.documentElement.animate({ clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] }, { duration: 650, easing: "cubic-bezier(.65,0,.35,1)", pseudoElement: "::view-transition-new(root)" });
+      });
     });
 
     $("#filters").addEventListener("click", (e) => {
@@ -256,6 +332,7 @@
       const f = b.dataset.filter;
       $$(".project").forEach((p) => p.classList.toggle("hidden", f !== "all" && p.dataset.cat !== f));
       $("#reposBlock").classList.toggle("hidden", f !== "all" && f !== "personal");
+      if (f === "personal") FXo().unlock("github");
       revealPassed();
     });
 
@@ -351,7 +428,7 @@
       const data = Object.fromEntries(new FormData(form));
       let bad = false;
       $$("input[required], textarea[required]", form).forEach((el) => { const ok = el.checkValidity(); el.classList.toggle("invalid", !ok); if (!ok) bad = true; });
-      if (bad) return setStatus("Please fill in your name, a valid email and a message (10+ characters).", "err");
+      if (bad) { FXo().sfx("error"); return setStatus("Please fill in your name, a valid email and a message (10+ characters).", "err"); }
 
       btn.disabled = true; setStatus("Sending…");
       try {
@@ -361,6 +438,7 @@
         if (!res.ok) throw Object.assign(new Error(body.error || "No backend"), { server: Boolean(body.error) });
         form.reset();
         setStatus("Thanks! Your message reached me. I'll get back to you within 24 hours.", "ok");
+        FXo().sfx("success"); FXo().unlock("contact"); FXo().confetti();
       } catch (err) {
         if (err.server) { setStatus(err.message, "err"); }
         else {
@@ -374,7 +452,29 @@
     });
   }
 
+  // ---------- command palette actions ----------
+  function paletteActions() {
+    const go = (id) => () => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const open = (url) => () => window.open(url, "_blank", "noopener");
+    const sections = [["about", "About"], ["skills", "Skills"], ["experience", "Experience"], ["projects", "Projects"], ["freelance", "Freelance"], ["awards", "Awards & education"], ["under-the-hood", "Under the hood"], ["contact", "Contact"]];
+    FXo().registerActions?.([
+      ...sections.map(([id, label]) => ({ icon: "→", label: "Go to " + label, group: "Navigate", run: go(id) })),
+      { icon: "📄", label: "Download résumé", group: "Actions", keywords: "cv pdf", run: () => COMMANDS.resume.run() },
+      { icon: "✉️", label: "Copy email address", group: "Actions", keywords: "mail", run: async () => { try { await navigator.clipboard.writeText(P.email); FXo().toast('<span class="t-icon">📋</span><div><strong>Email copied</strong></div>'); } catch (e) {} } },
+      { icon: "💬", label: "Chat on WhatsApp", group: "Actions", run: open("https://wa.me/" + P.phoneRaw.replace("+", "")) },
+      { icon: "✍️", label: "Write a message", group: "Actions", keywords: "contact hire", run: () => { go("contact")(); setTimeout(() => $("#contactForm input[name=name]").focus({ preventScroll: true }), 700); } },
+      { icon: "💻", label: "Open the terminal", group: "Actions", keywords: "cli shell", run: () => { scrollTo({ top: 0, behavior: "smooth" }); setTimeout(() => $("#termInput").focus({ preventScroll: true }), 500); } },
+      { icon: "🌗", label: "Toggle theme", group: "Preferences", keywords: "dark light night day", run: () => $("#themeToggle").click() },
+      { icon: "🔊", label: "Toggle sound", group: "Preferences", keywords: "mute audio", run: () => $("#soundToggle").click() },
+      { icon: "🐙", label: "Open GitHub", group: "Links", run: open(P.links.github) },
+      { icon: "💼", label: "Open LinkedIn", group: "Links", run: open(P.links.linkedin) },
+      { icon: "🚀", label: "Activate hire mode", group: "Secrets", keywords: "sudo party", run: () => COMMANDS.sudo.run("hire") }
+    ]);
+    $$('[data-bind-href="resume"]').forEach((a) => a.addEventListener("click", () => FXo().unlock("resume")));
+  }
+
   render();
+  paletteActions();
   typed();
   terminal();
   interactions();
