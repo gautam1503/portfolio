@@ -296,11 +296,17 @@
   // ======================================================================
   function wireEasterEggs() {
     const code = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
-    let pos = 0;
+    // Compare the last 10 keys, so extra presses before the sequence (e.g. ↑↑↑) don't break it.
+    const recent = [];
     addEventListener("keydown", (e) => {
       const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-      pos = k === code[pos] ? pos + 1 : k === code[0] ? 1 : 0;
-      if (pos === code.length) { pos = 0; hireMode(); unlock("konami"); }
+      recent.push(k);
+      if (recent.length > code.length) recent.shift();
+      if (recent.join() === code.join()) {
+        recent.length = 0;
+        if (e.target.id === "termInput") setTimeout(() => (e.target.value = ""));
+        hireMode(); unlock("konami");
+      }
       if ((e.ctrlKey || e.metaKey) && k === "k") { e.preventDefault(); palette(); }
       else if (k === "/" && !e.target.closest("input, textarea, [contenteditable]")) { e.preventDefault(); palette(); }
     });
@@ -388,6 +394,6 @@
     setMuted(muted);
     sb?.addEventListener("click", () => { setMuted(!muted); if (!muted) sfx("enter"); unlock("sound"); });
     $("#paletteBtn")?.addEventListener("click", palette);
-    wireUiSounds(); wireScramble(); wireMotion(); wireEasterEggs(); liveStatus(); localTime(); wireExplorer(); updateSecretsMeter();
+    wireUiSounds(); wireMotion(); wireEasterEggs(); liveStatus(); localTime(); wireExplorer(); updateSecretsMeter();
   });
 })();
