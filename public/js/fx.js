@@ -109,10 +109,9 @@
     resume: { icon: "📄", name: "Due Diligence", hint: "Download the résumé" },
     curious: { icon: "🔍", name: "Curious Mind", hint: "Click the GP logo a few times" },
     sudo: { icon: "🛡️", name: "Root Access", hint: "Try sudo in the terminal" },
-    konami: { icon: "🎮", name: "Cheat Code", hint: "↑ ↑ ↓ ↓ ← → ← → B A" },
     contact: { icon: "🤝", name: "Let's Talk", hint: "Send a message" }
   };
-  const unlocked = new Set(store.get("achievements", []));
+  const unlocked = new Set(store.get("achievements", []).filter((id) => ACHIEVEMENTS[id])); // drop retired ones
   function toast(html, cls = "") {
     let box = $("#toasts");
     if (!box) { box = document.createElement("div"); box.id = "toasts"; box.setAttribute("aria-live", "polite"); document.body.appendChild(box); }
@@ -305,7 +304,7 @@
       if (recent.join() === code.join()) {
         recent.length = 0;
         if (e.target.id === "termInput") setTimeout(() => (e.target.value = ""));
-        hireMode(); unlock("konami");
+        hireMode();
       }
       if ((e.ctrlKey || e.metaKey) && k === "k") { e.preventDefault(); palette(); }
       else if (k === "/" && !e.target.closest("input, textarea, [contenteditable]")) { e.preventDefault(); palette(); }
