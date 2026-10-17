@@ -120,7 +120,14 @@ app.get("/api/messages", async (req, res) => {
 
 app.use("/api", (req, res) => res.status(404).json({ error: "Not found" }));
 
-app.use(express.static(PUBLIC_DIR, { maxAge: "1h", extensions: ["html"] }));
+// Revalidate on every load (cheap 304s via ETag) so a deploy never mixes old HTML with new JS/CSS.
+// Only binary assets like the résumé PDF are cached for a while.
+app.use(express.static(PUBLIC_DIR, {
+  extensions: ["html"],
+  setHeaders(res, filePath) {
+    res.setHeader("Cache-Control", /\.(pdf|png|jpe?g|svg|woff2?)$/i.test(filePath) ? "public, max-age=3600" : "no-cache");
+  }
+}));
 app.get("*", (req, res) => res.sendFile(path.join(PUBLIC_DIR, "index.html")));
 
 app.use((err, req, res, next) => {
