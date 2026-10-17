@@ -114,19 +114,35 @@
     $("#edu").className = "card edu reveal";
     $("#edu").innerHTML = `<div><h3>${esc(P.education.degree)}</h3><div class="muted">${esc(P.education.school)}</div></div><div class="score grad">${esc(P.education.score)}</div>`;
 
-    const contacts = [
-      { label: "Email", value: P.email, href: "mailto:" + P.email, icon: "mail", copy: P.email },
-      { label: "Phone / WhatsApp", value: P.phone, href: "tel:" + P.phoneRaw, icon: "phone", copy: P.phoneRaw },
-      { label: "LinkedIn", value: "in/gautam-p", href: P.links.linkedin, icon: "linkedin" },
-      { label: "GitHub", value: P.links.github.replace("https://", ""), href: P.links.github, icon: "github" },
-      { label: "Location", value: P.location + " · Open to remote / relocation", icon: "pin" }
+    // Primary channels: whole card is the link, copy button sits beside it (not nested inside the link).
+    const primary = [
+      { label: "Email me", value: P.email, href: "mailto:" + P.email, icon: "mail", copy: P.email, tone: "indigo" },
+      { label: "Call or WhatsApp", value: P.phone, href: "tel:" + P.phoneRaw, icon: "phone", copy: P.phoneRaw, tone: "cyan" }
     ];
-    $("#contactCards").innerHTML = contacts.map((c) => {
-      const tag = c.href ? "a" : "div";
-      const attrs = c.href ? `href="${esc(c.href)}" ${c.href.startsWith("http") ? 'target="_blank" rel="noopener"' : ""}` : "";
-      const copy = c.copy ? `<button type="button" class="icon-btn copy" data-copy="${esc(c.copy)}" aria-label="Copy ${c.label}">${icon("copy")}</button>` : "";
-      return `<${tag} class="c-card" ${attrs}><div class="c-icon">${icon(c.icon)}</div><div><small>${c.label}</small><span>${esc(c.value)}</span></div>${copy}</${tag}>`;
-    }).join("");
+    const profiles = [
+      { label: "LinkedIn", value: "Gautam Pandey", href: P.links.linkedin, icon: "linkedin", tone: "linkedin" },
+      { label: "GitHub", value: "@" + P.github.user, href: P.links.github, icon: "github", tone: "github" },
+      { label: "LeetCode", value: "Problem solving", href: P.links.leetcode, icon: "leetcode", tone: "leetcode" },
+      { label: "WhatsApp", value: "Quick chat", href: "https://wa.me/" + P.phoneRaw.replace("+", ""), icon: "whatsapp", tone: "whatsapp" }
+    ];
+    $("#contactCards").innerHTML = `
+      <div class="c-primary">${primary.map((c) => `
+        <div class="c-card tone-${c.tone}">
+          <a class="c-main" href="${esc(c.href)}">
+            <span class="c-icon">${icon(c.icon)}</span>
+            <span class="c-text"><small>${c.label}</small><strong>${esc(c.value).replace("@", "<wbr>@")}</strong></span>
+          </a>
+          <button type="button" class="icon-btn copy" data-copy="${esc(c.copy)}" aria-label="Copy ${c.label.toLowerCase()}" title="Copy">${icon("copy")}</button>
+        </div>`).join("")}
+      </div>
+      <div class="c-profiles">${profiles.map((c) => `
+        <a class="c-tile tone-${c.tone}" href="${esc(c.href)}" target="_blank" rel="noopener">
+          <span class="c-icon">${icon(c.icon)}</span>
+          <span class="c-text"><strong>${c.label}</strong><small>${esc(c.value)}</small></span>
+          <span class="c-arrow">${icon("external")}</span>
+        </a>`).join("")}
+      </div>
+      <div class="c-location">${icon("pin")}<span>${esc(P.location)}</span><span class="c-badge">Open to remote &amp; relocation</span></div>`;
 
     const fab = $("#whatsappFab");
     fab.href = "https://wa.me/" + P.phoneRaw.replace("+", "") + "?text=" + encodeURIComponent("Hi Gautam, I saw your portfolio and would like to connect.");
