@@ -283,7 +283,7 @@
     const key = "repos:" + cfg.user;
     try {
       const c = JSON.parse(sessionStorage.getItem(key) || "null");
-      if (c && Date.now() - c.t < 10 * 60 * 1000) return c.repos;
+      if (c && Date.now() - c.t < 2 * 60 * 1000) return c.repos;
     } catch (e) {}
     let repos;
     try {

@@ -77,7 +77,7 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
 let repoCache = { at: 0, data: null };
 app.get("/api/github-repos", async (req, res) => {
   const user = process.env.GITHUB_USER || "gautam1503";
-  if (!repoCache.data || Date.now() - repoCache.at > 10 * 60 * 1000) {
+  if (!repoCache.data || Date.now() - repoCache.at > 2 * 60 * 1000) {
     try {
       const headers = { Accept: "application/vnd.github+json", "User-Agent": "portfolio" };
       if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
@@ -105,7 +105,7 @@ app.get("/api/github-repos", async (req, res) => {
       if (!repoCache.data) return res.status(502).json({ error: "Could not load GitHub projects" });
     }
   }
-  res.set("Cache-Control", "public, max-age=300, s-maxage=600, stale-while-revalidate=3600");
+  res.set("Cache-Control", "public, max-age=0, s-maxage=120, stale-while-revalidate=60");
   res.json(repoCache.data);
 });
 
