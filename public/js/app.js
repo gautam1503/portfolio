@@ -317,13 +317,22 @@
       FXo().unlock("theme");
       try { localStorage.setItem("theme", t); } catch (e) {}
       themeBtn.classList.remove("spin"); void themeBtn.offsetWidth; themeBtn.classList.add("spin");
-      // Circular reveal from the toggle button (View Transitions API), plain swap elsewhere.
-      if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) return applyTheme(t);
+      const root = document.documentElement;
+      // No View Transitions (Firefox, older Safari): one uniform colour fade across every element.
+      if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        root.classList.add("theme-fade");
+        applyTheme(t);
+        return setTimeout(() => root.classList.remove("theme-fade"), 500);
+      }
+      // Circular reveal from the toggle. Per-element transitions are paused so nothing lags behind the edge.
       const r = themeBtn.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
       const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-      document.startViewTransition(() => applyTheme(t)).ready.then(() => {
-        document.documentElement.animate({ clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] }, { duration: 650, easing: "cubic-bezier(.65,0,.35,1)", pseudoElement: "::view-transition-new(root)" });
+      root.classList.add("theme-switching");
+      const vt = document.startViewTransition(() => applyTheme(t));
+      vt.ready.then(() => {
+        root.animate({ clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] }, { duration: 700, easing: "cubic-bezier(.4,0,.2,1)", pseudoElement: "::view-transition-new(root)" });
       });
+      vt.finished.finally(() => root.classList.remove("theme-switching"));
     });
 
     $("#filters").addEventListener("click", (e) => {
